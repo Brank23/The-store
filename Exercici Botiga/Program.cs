@@ -182,5 +182,38 @@
             }
         }
 
+        static void ModificarPreu(string[] nomsProducte, ref double[] preusProducte, int contadorProductes)
+        {
+            Console.WriteLine("Introduce el nombre del producto que deseas modificar el precio: ");
+            string nomProducte = Console.ReadLine();
+            int posicionPrecio = -1;
+
+            for (int i = 0; i < contadorProductes; i++)
+            {
+                if (nomProducte == nomsProducte[i])
+                {
+                    posicionPrecio = i;
+                }
+            }
+
+            if (posicionPrecio != -1)
+            {
+                Console.WriteLine("Introduce el nuevo precio: ");
+                double nouPreu = double.Parse(Console.ReadLine());
+
+                preusProducte[posicionPrecio] = nouPreu;
+                //he encontrado el producto
+                Console.WriteLine(nouPreu);
+                Console.ReadLine();
+
+            }
+            else
+            {
+                Console.WriteLine("No existe un producto con ese nombre");
+                Console.ReadLine();
+            }
+
+        }
+
     }
 }
