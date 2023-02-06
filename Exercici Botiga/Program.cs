@@ -153,5 +153,34 @@
                 }
             }
         }
+
+        static void AmpliarBotiga(ref string[] nomsProducte, ref double[] preusProducte, ref int contadorProductes)
+        {
+            Console.WriteLine("Introduce el espacio total de productos que deseas: ");
+            int cantidad = int.Parse(Console.ReadLine());
+            if (cantidad > contadorProductes)
+            {
+                string[] nomsProducteNuevo = new string[cantidad];
+                double[] preusProducteNuevo = new double[cantidad];
+
+                for (int i = 0; i < contadorProductes; i++)
+                {
+                    nomsProducteNuevo[i] = nomsProducte[i];
+                    preusProducteNuevo[i] = preusProducte[i];
+                }
+                nomsProducte = nomsProducteNuevo;
+                preusProducte = preusProducteNuevo;
+
+                Console.WriteLine("Tamany modificat, tamany nou:" + cantidad + " productes actuals: " + contadorProductes);
+                Console.ReadLine();
+            }
+
+            else
+            {
+                Console.WriteLine("No se puede hacer la tienda mas pequeña o igual");
+                Console.ReadLine();
+            }
+        }
+
     }
 }
