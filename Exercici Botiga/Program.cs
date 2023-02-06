@@ -52,5 +52,106 @@
             }
 
         }
+
+        public static void Botiga(ref string[] nomsProducte, ref double[] preusProducte, ref int contadorProductes)
+        {
+
+            Console.Clear();
+            Console.WriteLine("Ha entrat en la nostre botiga, escolleix l'opció que vulguis:");
+            Console.WriteLine("1 - Afegir un nou producte");
+            Console.WriteLine("2 - Ampliar botiga");
+            Console.WriteLine("3 - Modificar preu");
+            Console.WriteLine("4 - Modificar nom de producte");
+            Console.WriteLine("5 - Ordenar per nom");
+            Console.WriteLine("6 - Ordenar per preu");
+            Console.WriteLine("7 - Mostrar botiga");
+            Console.WriteLine("8 - Tornar enrrere\n");
+
+            int resposta = int.Parse(Console.ReadLine());
+            Console.WriteLine();
+
+            while (resposta < 1 || resposta > 8)
+            {
+                resposta = int.Parse(Console.ReadLine());
+            }
+
+            switch (resposta)
+            {
+                case 1:
+                    string resposta1 = "";
+
+                    Console.WriteLine("\nProductes en la botiga -> " + contadorProductes);
+                    Console.WriteLine("Capacitat del magatzem -> " + nomsProducte.Length);
+                    Console.WriteLine();
+                    if (contadorProductes == nomsProducte.Length)
+                    {
+                        //en teoria es porque ya esta la tienda llena
+                        Console.WriteLine("No tenim espai per més productes, vols ampliar l'espai del magatzem? y/n");
+                        while (resposta1 != "y" || resposta1 != "n")
+                        {
+                            resposta1 = Console.ReadLine().ToLower();
+                        }
+                        if (resposta1 == "y")
+                        {
+                            AmpliarBotiga(ref nomsProducte, ref preusProducte, ref contadorProductes);
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("Introdueix el nom del producte:");
+                        string nomProducte = Console.ReadLine();
+                        Console.WriteLine("\nIntrodueix el preu del producte:");
+                        double preuProducte = Double.Parse(Console.ReadLine());
+                        //productes = AfegirProducte(nomProducte, preuProducte);
+                        nomsProducte[contadorProductes] = nomProducte;
+                        preusProducte[contadorProductes] = preuProducte;
+                        contadorProductes++;
+                        Console.WriteLine("\nProducte creat, pressiona qualsevol tecla per tornar al menú");
+                        Console.ReadLine();
+                    }
+
+                    break;
+                case 2:
+                    AmpliarBotiga(ref nomsProducte, ref preusProducte, ref contadorProductes);
+                    break;
+                case 3:
+                    ModificarPreu(nomsProducte, ref preusProducte, contadorProductes);
+                    break;
+                case 4:
+                    ModificarNomDeProducte(ref nomsProducte, preusProducte, contadorProductes);
+                    break;
+                case 5:
+                    OrdenarPerNom();
+                    break;
+                case 6:
+                    OrdenarPerPreu();
+                    break;
+                case 7:
+                    MostrarBotiga(nomsProducte, preusProducte);
+                    break;
+                case 8:
+                    Benvingut();
+                    break;
+            }
+        }
+
+        static void Cistella()
+        {
+            Console.Clear();
+            Console.WriteLine("Ha entrat en la opció de compra, escriu el nom del producte que desitjes posar a la cistella:");
+
+            string resposta = Console.ReadLine();
+            Console.WriteLine();
+
+            int posicionNom = -1;
+
+            for (int i = 0; i < contadorProductes; i++)
+            {
+                if (resposta == nomsProducte[i])
+                {
+                    posicionNom = i;
+                }
+            }
+        }
     }
 }
