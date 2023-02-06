@@ -212,6 +212,38 @@
                 Console.WriteLine("No existe un producto con ese nombre");
                 Console.ReadLine();
             }
+        }
+
+        public static void ModificarNomDeProducte(ref string[] nomsProducte, double[] preusProducte, int contadorProductes)
+        {
+            Console.WriteLine("Introduce el nombre del producto que deseas modificar su nombre: ");
+            string nomProducte = Console.ReadLine();
+            int posicionNom = -1;
+
+            for (int i = 0; i < contadorProductes; i++)
+            {
+                if (nomProducte == nomsProducte[i])
+                {
+                    posicionNom = i;
+                }
+            }
+
+            if (posicionNom != -1)
+            {
+                Console.WriteLine("Introduce el nuevo nombre: ");
+                string nouNom = Console.ReadLine();
+
+                nomsProducte[posicionNom] = nouNom;
+                //he encontrado el producto
+                Console.WriteLine(nouNom);
+                Console.ReadLine();
+
+            }
+            else
+            {
+                Console.WriteLine("No existe un producto con ese nombre");
+                Console.ReadLine();
+            }
 
         }
 
