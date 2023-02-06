@@ -27,7 +27,7 @@
                         break;
                     case 2:
                         //TODO: pasarle los arrays y el contador por referencia
-                        Cistella();
+                        Cistella(ref nomsProducte, ref preusProducte, ref contadorProductes);
                         break;
                     case 3:
                         Environment.Exit(0);
@@ -134,26 +134,74 @@
             }
         }
 
-        static void Cistella()
+
+        static void Cistella(ref string[] nomsProducte, ref double[] preusProducte, ref int contadorProductes)
         {
+            string[] producte = new string[10];
+            double[] preus = new double[10];
+            int cont = 0;
+            string respostaAmpliar = "";
+
             Console.Clear();
             Console.WriteLine("Ha entrat en la opció de compra, escriu el nom del producte que desitjes posar a la cistella:");
 
             string resposta = Console.ReadLine();
             Console.WriteLine();
 
-            int posicionNom = -1;
+            int posicioProducte = -1;
 
-            for (int i = 0; i < contadorProductes; i++)
+            if (cont > contadorProductes)
             {
-                if (resposta == nomsProducte[i])
+                Console.WriteLine("La cistella está plena, vols ampliar-la? y/n");
+                while (respostaAmpliar != "y" || respostaAmpliar != "n")
                 {
-                    posicionNom = i;
+                    respostaAmpliar = Console.ReadLine().ToLower();
                 }
+                if (respostaAmpliar == "y")
+                {
+                    Console.WriteLine("Introdueix quant vols ampliar la cistella: ");
+                    int cantidad = int.Parse(Console.ReadLine());
+                    if (cantidad > contadorProductes)
+                    {
+                        string[] nomsProducteNuevo = new string[cantidad];
+                        double[] preusProducteNuevo = new double[cantidad];
+
+                        for (int i = 0; i < contadorProductes; i++)
+                        {
+                            nomsProducteNuevo[i] = nomsProducte[i];
+                            preusProducteNuevo[i] = preusProducte[i];
+                        }
+                        nomsProducte = nomsProducteNuevo;
+                        preusProducte = preusProducteNuevo;
+                    }
+
+
+                }
+
+                else
+                {
+                    for (int i = 0; i < contadorProductes; i++)
+                    {
+
+                        if (resposta == nomsProducte[i])
+                        {
+
+                            producte[cont] = nomsProducte[i];
+                            preus[cont] = preusProducte[i];
+                            cont++;
+                        }
+                        else
+                        {
+                            Console.WriteLine("No se puede hacer la tienda mas pequeña o igual");
+                            Console.ReadLine();
+                        }
+                    }
+                }
+
             }
         }
 
-        static void AmpliarBotiga(ref string[] nomsProducte, ref double[] preusProducte, ref int contadorProductes)
+            static void AmpliarBotiga(ref string[] nomsProducte, ref double[] preusProducte, ref int contadorProductes)
         {
             Console.WriteLine("Introduce el espacio total de productos que deseas: ");
             int cantidad = int.Parse(Console.ReadLine());
