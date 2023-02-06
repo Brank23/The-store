@@ -40,17 +40,16 @@
                 exit = Console.ReadLine();
 
             }
+        }
 
-            static void Benvingut()
-            {
-                Console.Clear();
-                Console.WriteLine("______________________________________________");
-                Console.WriteLine("Benvingut a la nostre botiga, que desitja fer?");
-                Console.WriteLine("1 - Botiga ");
-                Console.WriteLine("2 - Cistella");
-                Console.WriteLine("3 - Sortir");
-            }
-
+        static void Benvingut()
+        {
+            Console.Clear();
+            Console.WriteLine("______________________________________________");
+            Console.WriteLine("Benvingut a la nostre botiga, que desitja fer?");
+            Console.WriteLine("1 - Botiga ");
+            Console.WriteLine("2 - Cistella");
+            Console.WriteLine("3 - Sortir");
         }
 
         public static void Botiga(ref string[] nomsProducte, ref double[] preusProducte, ref int contadorProductes)
@@ -244,7 +243,30 @@
                 Console.WriteLine("No existe un producto con ese nombre");
                 Console.ReadLine();
             }
+        }
 
+        public static void OrdenarPerNom()
+        {
+            // Aquí debes ordenar la lista o el array de productos por nombre
+        }
+
+        public static void OrdenarPerPreu()
+        {
+            // Aquí debes ordenar la lista o el array de productos por precio
+        }
+
+        public static void MostrarBotiga(string[] nomsProducte, double[] preusProducte)
+        {
+            Console.Clear();
+            Console.WriteLine("Nombre del producto\tPrecio");
+            Console.WriteLine("--------------------------------------");
+
+
+            for (int i = 0; i < nomsProducte.Length; i++)
+            {
+                Console.WriteLine($"{nomsProducte[i]}\t\t\t{preusProducte[i]}");
+            }
+            Thread.Sleep(4000);
         }
 
     }
