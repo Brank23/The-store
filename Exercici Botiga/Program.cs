@@ -2,7 +2,7 @@
 {
     internal class Program
     {
-        public static void Main(string[] args)
+        static void Main(string[] args)
         {
             string[] nomsProducte = new string[2];
             double[] preusProducte = new double[2];
@@ -39,6 +39,16 @@
                 Console.WriteLine("Vols sortir de la botiga? y/n");
                 exit = Console.ReadLine();
 
+            }
+
+            static void Benvingut()
+            {
+                Console.Clear();
+                Console.WriteLine("______________________________________________");
+                Console.WriteLine("Benvingut a la nostre botiga, que desitja fer?");
+                Console.WriteLine("1 - Botiga ");
+                Console.WriteLine("2 - Cistella");
+                Console.WriteLine("3 - Sortir");
             }
 
         }
