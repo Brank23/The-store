@@ -159,9 +159,9 @@
                 case 1:
                     ComprarProducte(ref nomsProducte, ref preusProducte, ref contadorProductes, ref diners);
                     break;
-                    //case 2:
-                    //    MostrarCistella(ref nomsProducte, ref preusProducte, ref contadorProductes);
-                    //    break;
+                case 2:
+                    MostrarCistella(ref nomsProducte, ref preusProducte, ref contadorProductes);
+                    break;
                     //case 3:
                     //    OrdenarCistella(ref nomsProducte, ref preusProducte, ref contadorProductes);
                     //    break;
@@ -219,7 +219,21 @@
             }
         }
 
-
+        public static void MostrarCistella(ref string[] nomsProducte, ref double[] preusProducte, ref int contadorProductes)
+        {
+            if (contadorProductes == 0)
+            {
+                Console.WriteLine("La cistella está vacía.");
+            }
+            else
+            {
+                Console.WriteLine("Productos en la cistella:");
+                for (int i = 0; i < contadorProductes; i++)
+                {
+                    Console.WriteLine(nomsProducte[i] + " " + preusProducte[i] + "€");
+                }
+            }
+        }
 
 
         static void AmpliarBotiga(ref string[] nomsProducte, ref double[] preusProducte, ref int contadorProductes)
