@@ -123,7 +123,7 @@
                     OrdenarPerNom();
                     break;
                 case 6:
-                    OrdenarPerPreu();
+                    OrdenarPerPreu(ref nomsProducte, ref preusProducte, ref contadorProductes);
                     break;
                 case 7:
                     MostrarBotiga(nomsProducte, preusProducte);
@@ -298,9 +298,41 @@
             // Aquí debes ordenar la lista o el array de productos por nombre
         }
 
-        public static void OrdenarPerPreu()
+        public static void OrdenarPerPreu(ref string[] nomsProducte, ref double[] preusProducte, ref int contadorProductes)
         {
-            // Aquí debes ordenar la lista o el array de productos por precio
+            int pmenor;
+            for (int volta = 0; volta < contadorProductes - 1; volta++)
+            {
+                pmenor = volta;
+                for (int i = volta + 1; i < contadorProductes; i++)
+                {
+                    if (preusProducte[pmenor] > preusProducte[i])
+                        pmenor = i;
+                    if (pmenor != volta)
+                    {
+                        double aux = preusProducte[pmenor];
+                        string aux2 = nomsProducte[pmenor];
+                        preusProducte[pmenor] = preusProducte[volta];
+                        nomsProducte[pmenor] = nomsProducte[volta];
+                        preusProducte[volta] = aux;
+                        nomsProducte[volta] = aux2;
+                    }
+                }
+
+            }
+
+
+            Console.Clear();
+            Console.WriteLine("Nombre del producto\tPrecio");
+            Console.WriteLine("--------------------------------------");
+
+
+            for (int i = 0; i < nomsProducte.Length; i++)
+            {
+                Console.WriteLine("{0}\t\t\t{1}", preusProducte[i], nomsProducte[i]);
+            }
+            Thread.Sleep(10000);
+
         }
 
         public static void MostrarBotiga(string[] nomsProducte, double[] preusProducte)
