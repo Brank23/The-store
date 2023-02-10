@@ -86,7 +86,11 @@
                     Console.WriteLine();
                     if (contadorProductes == nomsProducte.Length)
                     {
+<<<<<<< HEAD
                         //en teoria es porque ya esta la tienda llena
+=======
+                        //en teoria la botiga esta plena
+>>>>>>> eloi
                         Console.WriteLine("No tenim espai per més productes, vols ampliar l'espai del magatzem? y/n\n");
                         while (resposta1 != "y" && resposta1 != "n")
                         {
@@ -230,7 +234,11 @@
             }
             else
             {
+<<<<<<< HEAD
                 Console.WriteLine("Productos en la cistella:");
+=======
+                Console.WriteLine("Productes en la cistella:");
+>>>>>>> eloi
                 for (int i = 0; i < contadorProductes; i++)
                 {
                     Console.WriteLine(nomsProducte[i] + " " + preusProducte[i] + " euros");
@@ -277,7 +285,11 @@
 
         static void AmpliarBotiga(ref string[] nomsProducte, ref double[] preusProducte, ref int contadorProductes)
         {
+<<<<<<< HEAD
             Console.WriteLine("\nIntroduce el espacio total de productos que deseas: ");
+=======
+            Console.WriteLine("\nIntrodueix la quantitat d'espais que vols afegir: ");
+>>>>>>> eloi
             int cantidad = int.Parse(Console.ReadLine());
             if (cantidad > contadorProductes)
             {
@@ -298,14 +310,14 @@
 
             else
             {
-                Console.WriteLine("No se puede hacer la tienda mas pequeña o igual");
+                Console.WriteLine("No es pot fer la botiga mes petita o igual");
                 Console.ReadLine();
             }
         }
 
         static void ModificarPreu(string[] nomsProducte, ref double[] preusProducte, int contadorProductes)
         {
-            Console.WriteLine("Introduce el nombre del producto que deseas modificar el precio: ");
+            Console.WriteLine("Introdueix el nom que desitges modificar: ");
             string nomProducte = Console.ReadLine();
             int posicionPrecio = -1;
 
@@ -319,25 +331,25 @@
 
             if (posicionPrecio != -1)
             {
-                Console.WriteLine("Introduce el nuevo precio: ");
+                Console.WriteLine("Introdueix el nou preu: ");
                 double nouPreu = double.Parse(Console.ReadLine());
 
                 preusProducte[posicionPrecio] = nouPreu;
-                //he encontrado el producto
+                //he trobat el producte
                 Console.WriteLine(nouPreu);
                 Console.ReadLine();
 
             }
             else
             {
-                Console.WriteLine("No existe un producto con ese nombre");
+                Console.WriteLine("No existeix el producte");
                 Console.ReadLine();
             }
         }
 
         public static void ModificarNomDeProducte(ref string[] nomsProducte, double[] preusProducte, int contadorProductes)
         {
-            Console.WriteLine("Introduce el nombre del producto que deseas modificar su nombre: ");
+            Console.WriteLine("Introdueix el nom del producte que desitges modificar: ");
             string nomProducte = Console.ReadLine();
             int posicionNom = -1;
 
@@ -355,21 +367,25 @@
                 string nouNom = Console.ReadLine();
 
                 nomsProducte[posicionNom] = nouNom;
-                //he encontrado el producto
+                //hem trobat el producte
                 Console.WriteLine(nouNom);
                 Console.ReadLine();
 
             }
             else
             {
-                Console.WriteLine("No existe un producto con ese nombre");
+                Console.WriteLine("No existeix el producte");
                 Console.ReadLine();
             }
         }
 
         public static void OrdenarPerNom(ref string[] nomsProducte, ref double[] preusProducte, ref int contadorProductes)
         {
+<<<<<<< HEAD
             // Aquí debes ordenar la lista o el array de productos por nombre
+=======
+            
+>>>>>>> eloi
             string aux;
             double aux2;
             for (int i = 1; i <= contadorProductes; i++)
@@ -389,7 +405,11 @@
             }
 
             Console.Clear();
+<<<<<<< HEAD
             Console.WriteLine("Nombre del producto\tPrecio");
+=======
+            Console.WriteLine("Nom del producte \tPreu");
+>>>>>>> eloi
             Console.WriteLine("--------------------------------------");
 
 
@@ -402,7 +422,11 @@
         }
         public static void OrdenarPerPreu(ref string[] nomsProducte, ref double[] preusProducte, ref int contadorProductes)
         {
+<<<<<<< HEAD
             
+=======
+
+>>>>>>> eloi
             int pmenor;
             for (int volta = 0; volta < contadorProductes - 1; volta++)
             {
@@ -426,7 +450,11 @@
 
 
             Console.Clear();
+<<<<<<< HEAD
             Console.WriteLine("Nombre del producto\tPrecio");
+=======
+            Console.WriteLine("Nom del producte\tPreu");
+>>>>>>> eloi
             Console.WriteLine("--------------------------------------");
 
 
@@ -442,7 +470,11 @@
         public static void MostrarBotiga(string[] nomsProducte, double[] preusProducte)
         {
             Console.Clear();
+<<<<<<< HEAD
             Console.WriteLine("Nombre del producto\tPrecio");
+=======
+            Console.WriteLine("Nom del producte\tPreu");
+>>>>>>> eloi
             Console.WriteLine("═════════════════════════════════════");
 
 
