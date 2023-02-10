@@ -120,7 +120,7 @@
                     ModificarNomDeProducte(ref nomsProducte, preusProducte, contadorProductes);
                     break;
                 case 5:
-                    OrdenarPerNom();
+                    OrdenarPerNom(ref  nomsProducte, ref  preusProducte, ref  contadorProductes);
                     break;
                 case 6:
                     OrdenarPerPreu(ref nomsProducte, ref preusProducte, ref contadorProductes);
@@ -292,10 +292,37 @@
                 Console.ReadLine();
             }
         }
-
-        public static void OrdenarPerNom()
+        public static void OrdenarPerNom(ref string[] nomsProducte, ref double[] preusProducte, ref int contadorProductes)
         {
-            // Aquí debes ordenar la lista o el array de productos por nombre
+            string aux;
+            double aux2;
+            for (int i = 1; i <= contadorProductes; i++)
+            {
+                for (int j = 0; j < contadorProductes - i; j++)
+                {
+                    if (nomsProducte[j].CompareTo(nomsProducte[j + 1]) > 0)
+                    {
+                        aux = nomsProducte[j];
+                        aux2 = preusProducte[j];
+                        preusProducte[j] = preusProducte[j + 1];
+                        nomsProducte[j] = nomsProducte[j + 1];
+                        nomsProducte[j + 1] = aux;
+                        preusProducte[j + 1] = aux2;
+                    }
+                }
+            }
+
+            Console.Clear();
+            Console.WriteLine("Nombre del producto\tPrecio");
+            Console.WriteLine("--------------------------------------");
+
+
+            for (int i = 0; i < nomsProducte.Length; i++)
+            {
+                Console.WriteLine("{0}\t\t\t{1}", preusProducte[i], nomsProducte[i]);
+            }
+            Thread.Sleep(10000);
+
         }
 
         public static void OrdenarPerPreu(ref string[] nomsProducte, ref double[] preusProducte, ref int contadorProductes)
