@@ -7,9 +7,10 @@
             string[] nomsProducte = new string[2];
             double[] preusProducte = new double[2];
             int contadorProductes = 0;
-
+            double diners = 10;
             string exit = "";
             int resposta;
+
             while (exit != "y")
             {
                 Benvingut();
@@ -27,7 +28,7 @@
                         break;
                     case 2:
                         //TODO: pasarle los arrays y el contador por referencia
-                        Cistella(ref nomsProducte, ref preusProducte, ref contadorProductes);
+                        Cistella(ref nomsProducte, ref preusProducte, ref contadorProductes, ref diners);
                         break;
                     case 3:
                         Environment.Exit(0);
@@ -35,7 +36,7 @@
 
                 }
                 Console.Clear();
-                Console.WriteLine("_____________________________");
+                Console.WriteLine("═════════════════════════════");
                 Console.WriteLine("Vols sortir de la botiga? y/n");
                 exit = Console.ReadLine();
 
@@ -45,11 +46,11 @@
         static void Benvingut()
         {
             Console.Clear();
-            Console.WriteLine("______________________________________________");
             Console.WriteLine("Benvingut a la nostre botiga, que desitja fer?");
+            Console.WriteLine("══════════════════════════════════════════════");
             Console.WriteLine("1 - Botiga ");
             Console.WriteLine("2 - Cistella");
-            Console.WriteLine("3 - Sortir");
+            Console.WriteLine("3 - Sortir\n");
         }
 
         public static void Botiga(ref string[] nomsProducte, ref double[] preusProducte, ref int contadorProductes)
@@ -57,6 +58,7 @@
 
             Console.Clear();
             Console.WriteLine("Ha entrat en la nostre botiga, escolleix l'opció que vulguis:");
+            Console.WriteLine("═════════════════════════════════════════════════════════════");
             Console.WriteLine("1 - Afegir un nou producte");
             Console.WriteLine("2 - Ampliar botiga");
             Console.WriteLine("3 - Modificar preu");
@@ -85,13 +87,14 @@
                     if (contadorProductes == nomsProducte.Length)
                     {
                         //en teoria es porque ya esta la tienda llena
-                        Console.WriteLine("No tenim espai per més productes, vols ampliar l'espai del magatzem? y/n");
-                        while (resposta1 != "y" || resposta1 != "n")
+                        Console.WriteLine("No tenim espai per més productes, vols ampliar l'espai del magatzem? y/n\n");
+                        while (resposta1 != "y" && resposta1 != "n")
                         {
                             resposta1 = Console.ReadLine().ToLower();
                         }
                         if (resposta1 == "y")
                         {
+                            Console.WriteLine();
                             AmpliarBotiga(ref nomsProducte, ref preusProducte, ref contadorProductes);
                         }
                     }
@@ -105,8 +108,8 @@
                         nomsProducte[contadorProductes] = nomProducte;
                         preusProducte[contadorProductes] = preuProducte;
                         contadorProductes++;
-                        Console.WriteLine("\nProducte creat, pressiona qualsevol tecla per tornar al menú");
-                        Console.ReadLine();
+                        Console.WriteLine("\nProducte creat");
+                        Thread.Sleep(1500);
                     }
 
                     break;
@@ -120,10 +123,10 @@
                     ModificarNomDeProducte(ref nomsProducte, preusProducte, contadorProductes);
                     break;
                 case 5:
-                    OrdenarPerNom();
+                    OrdenarPerNom(ref nomsProducte, ref preusProducte, ref contadorProductes);
                     break;
                 case 6:
-                    OrdenarPerPreu();
+                    OrdenarPerPreu(ref nomsProducte, ref preusProducte, ref contadorProductes);
                     break;
                 case 7:
                     MostrarBotiga(nomsProducte, preusProducte);
@@ -134,76 +137,147 @@
             }
         }
 
-
-        static void Cistella(ref string[] nomsProducte, ref double[] preusProducte, ref int contadorProductes)
+        public static void Cistella(ref string[] nomsProducte, ref double[] preusProducte, ref int contadorProductes, ref double diners)
         {
-            string[] producte = new string[10];
-            double[] preus = new double[10];
-            int cont = 0;
-            string respostaAmpliar = "";
+            string[] productesCarro = new string[10];
 
             Console.Clear();
-            Console.WriteLine("Ha entrat en la opció de compra, escriu el nom del producte que desitjes posar a la cistella:");
+            Console.WriteLine("Ha entrat a la seva cistella, escull l'opció que vulguis:");
+            Console.WriteLine("═════════════════════════════════════════════════════════");
+            Console.WriteLine("1 - Comprar producte");
+            Console.WriteLine("2 - Veure cistella");
+            Console.WriteLine("3 - Ordenar cistella");
+            Console.WriteLine("4 - Mostrar tiquet");
+            Console.WriteLine("5 - Tornar enrere\n");
 
-            string resposta = Console.ReadLine();
+            int resposta = int.Parse(Console.ReadLine());
             Console.WriteLine();
 
-            int posicioProducte = -1;
-
-            if (cont > contadorProductes)
+            while (resposta < 1 || resposta > 5)
             {
-                Console.WriteLine("La cistella está plena, vols ampliar-la? y/n");
-                while (respostaAmpliar != "y" || respostaAmpliar != "n")
-                {
-                    respostaAmpliar = Console.ReadLine().ToLower();
-                }
-                if (respostaAmpliar == "y")
-                {
-                    Console.WriteLine("Introdueix quant vols ampliar la cistella: ");
-                    int cantidad = int.Parse(Console.ReadLine());
-                    if (cantidad > contadorProductes)
-                    {
-                        string[] nomsProducteNuevo = new string[cantidad];
-                        double[] preusProducteNuevo = new double[cantidad];
+                resposta = int.Parse(Console.ReadLine());
+            }
 
-                        for (int i = 0; i < contadorProductes; i++)
-                        {
-                            nomsProducteNuevo[i] = nomsProducte[i];
-                            preusProducteNuevo[i] = preusProducte[i];
-                        }
-                        nomsProducte = nomsProducteNuevo;
-                        preusProducte = preusProducteNuevo;
-                    }
-
-
-                }
-
-                else
-                {
-                    for (int i = 0; i < contadorProductes; i++)
-                    {
-
-                        if (resposta == nomsProducte[i])
-                        {
-
-                            producte[cont] = nomsProducte[i];
-                            preus[cont] = preusProducte[i];
-                            cont++;
-                        }
-                        else
-                        {
-                            Console.WriteLine("No se puede hacer la tienda mas pequeña o igual");
-                            Console.ReadLine();
-                        }
-                    }
-                }
-
+            switch (resposta)
+            {
+                case 1:
+                    ComprarProducte(ref nomsProducte, ref preusProducte, ref contadorProductes, ref diners);
+                    break;
+                case 2:
+                    MostrarCistella(ref nomsProducte, ref preusProducte, ref contadorProductes);
+                    break;
+                case 3:
+                    OrdenarCistella(ref nomsProducte, ref preusProducte, ref contadorProductes);
+                    break;
+                case 4:
+                    MostrarTiquet(ref nomsProducte, ref preusProducte, ref contadorProductes, ref diners);
+                    break;
             }
         }
 
-            static void AmpliarBotiga(ref string[] nomsProducte, ref double[] preusProducte, ref int contadorProductes)
+        public static void ComprarProducte(ref string[] nomsProducte, ref double[] preusProducte, ref int contadorProductes, ref double diners)
         {
-            Console.WriteLine("Introduce el espacio total de productos que deseas: ");
+
+            Console.Clear();
+            MostrarBotiga(nomsProducte, preusProducte);
+            Console.WriteLine("══════════════════════════════════");
+            Console.WriteLine("Has entrat en la botiga\n");
+            Console.WriteLine($"\nA la teva caixa hi ha: {diners} euros\n");
+
+            Console.WriteLine("Introdueix el nom del producte que vols comprar:");
+            string nombreProducto = Console.ReadLine();
+            Console.WriteLine("\nIntrodueix la quantitat de productes que vols comprar:");
+            int cantidad = int.Parse(Console.ReadLine());
+
+            for (int i = 0; i < nomsProducte.Length; i++)
+            {
+                if (nombreProducto == nomsProducte[i])
+                {
+                    if (diners >= preusProducte[i] * cantidad)
+                    {
+                        diners -= preusProducte[i] * cantidad;
+                        Console.WriteLine("\nProducte possat a la caixa");
+                        Thread.Sleep(2000);
+                    }
+                    else
+                    {
+                        Console.WriteLine("\nNo tens suficients diners per comprar aquest producte");
+                        Console.WriteLine("\nVos afegir diners als teus estalvis? (S/N)");
+                        string opcion = Console.ReadLine();
+                        if (opcion.ToUpper() == "S")
+                        {
+                            Console.WriteLine("\nIntrodueix la quantitat de diners que vols afegi-hi:");
+                            double dineroAAgregar = double.Parse(Console.ReadLine());
+                            diners += dineroAAgregar;
+                            ComprarProducte(ref nomsProducte, ref preusProducte, ref contadorProductes, ref diners);
+                        }
+                        else
+                        {
+                            Console.WriteLine("\nNo s'ha afegit diners al teu compte i no s'ha pogut comprar el producte");
+                            Thread.Sleep(2000);
+                        }
+                    }
+                }
+            }
+        }
+
+        public static void MostrarCistella(ref string[] nomsProducte, ref double[] preusProducte, ref int contadorProductes)
+        {
+            if (contadorProductes == 0)
+            {
+                Console.WriteLine("La cistella está vacía.");
+                Thread.Sleep(2000);
+            }
+            else
+            {
+                Console.WriteLine("Productos en la cistella:");
+                for (int i = 0; i < contadorProductes; i++)
+                {
+                    Console.WriteLine(nomsProducte[i] + " " + preusProducte[i] + " euros");
+                    Thread.Sleep(100);
+                }
+                Thread.Sleep(2000);
+            }
+        }
+
+        public static void OrdenarCistella(ref string[] nomsProducte, ref double[] preusProducte, ref int contadorProductes)
+        {
+            Console.Clear();
+            for (int i = 0; i < contadorProductes; i++)
+            {
+                for (int j = i + 1; j < contadorProductes; j++)
+                {
+                    if (preusProducte[i] > preusProducte[j])
+                    {
+                        double temp = preusProducte[i];
+                        preusProducte[i] = preusProducte[j];
+                        preusProducte[j] = temp;
+
+                        string tempNom = nomsProducte[i];
+                        nomsProducte[i] = nomsProducte[j];
+                        nomsProducte[j] = tempNom;
+                    }
+                }
+            }
+            Console.WriteLine("\nCistella ordenada!");
+            Thread.Sleep(2000);
+        }
+
+        public static void MostrarTiquet(ref string[] nomsProducte, ref double[] preusProducte, ref int contadorProductes, ref double diners)
+        {
+            double preuTotal = 0;
+            Console.WriteLine("Nom\t\tPreu");
+            for (int i = 0; i < contadorProductes; i++)
+            {
+                Console.WriteLine(nomsProducte[i] + "\t\t" + preusProducte[i]);
+                preuTotal += preusProducte[i];
+            }
+            Console.WriteLine("Preu total: " + preuTotal);
+        }
+
+        static void AmpliarBotiga(ref string[] nomsProducte, ref double[] preusProducte, ref int contadorProductes)
+        {
+            Console.WriteLine("\nIntroduce el espacio total de productos que deseas: ");
             int cantidad = int.Parse(Console.ReadLine());
             if (cantidad > contadorProductes)
             {
@@ -218,7 +292,7 @@
                 nomsProducte = nomsProducteNuevo;
                 preusProducte = preusProducteNuevo;
 
-                Console.WriteLine("Tamany modificat, tamany nou:" + cantidad + " productes actuals: " + contadorProductes);
+                Console.WriteLine("\nTamany modificat, tamany nou: " + cantidad + " productes actuals: " + contadorProductes);
                 Console.ReadLine();
             }
 
@@ -293,21 +367,83 @@
             }
         }
 
-        public static void OrdenarPerNom()
+        public static void OrdenarPerNom(ref string[] nomsProducte, ref double[] preusProducte, ref int contadorProductes)
         {
             // Aquí debes ordenar la lista o el array de productos por nombre
+            string aux;
+            double aux2;
+            for (int i = 1; i <= contadorProductes; i++)
+            {
+                for (int j = 0; j < contadorProductes - i; j++)
+                {
+                    if (nomsProducte[j].CompareTo(nomsProducte[j + 1]) > 0)
+                    {
+                        aux = nomsProducte[j];
+                        aux2 = preusProducte[j];
+                        preusProducte[j] = preusProducte[j + 1];
+                        nomsProducte[j] = nomsProducte[j + 1];
+                        nomsProducte[j + 1] = aux;
+                        preusProducte[j + 1] = aux2;
+                    }
+                }
+            }
+
+            Console.Clear();
+            Console.WriteLine("Nombre del producto\tPrecio");
+            Console.WriteLine("--------------------------------------");
+
+
+            for (int i = 0; i < nomsProducte.Length; i++)
+            {
+                Console.WriteLine("{0}\t\t\t{1}", preusProducte[i], nomsProducte[i]);
+            }
+            Thread.Sleep(10000);
+
+        }
+        public static void OrdenarPerPreu(ref string[] nomsProducte, ref double[] preusProducte, ref int contadorProductes)
+        {
+            
+            int pmenor;
+            for (int volta = 0; volta < contadorProductes - 1; volta++)
+            {
+                pmenor = volta;
+                for (int i = volta + 1; i < contadorProductes; i++)
+                {
+                    if (preusProducte[pmenor] > preusProducte[i])
+                        pmenor = i;
+                    if (pmenor != volta)
+                    {
+                        double aux = preusProducte[pmenor];
+                        string aux2 = nomsProducte[pmenor];
+                        preusProducte[pmenor] = preusProducte[volta];
+                        nomsProducte[pmenor] = nomsProducte[volta];
+                        preusProducte[volta] = aux;
+                        nomsProducte[volta] = aux2;
+                    }
+                }
+
+            }
+
+
+            Console.Clear();
+            Console.WriteLine("Nombre del producto\tPrecio");
+            Console.WriteLine("--------------------------------------");
+
+
+            for (int i = 0; i < nomsProducte.Length; i++)
+            {
+                Console.WriteLine("{0}\t\t\t{1}", preusProducte[i], nomsProducte[i]);
+            }
+            Thread.Sleep(10000);
+
         }
 
-        public static void OrdenarPerPreu()
-        {
-            // Aquí debes ordenar la lista o el array de productos por precio
-        }
 
         public static void MostrarBotiga(string[] nomsProducte, double[] preusProducte)
         {
             Console.Clear();
             Console.WriteLine("Nombre del producto\tPrecio");
-            Console.WriteLine("--------------------------------------");
+            Console.WriteLine("═════════════════════════════════════");
 
 
             for (int i = 0; i < nomsProducte.Length; i++)
