@@ -36,7 +36,7 @@
 
                 }
                 Console.Clear();
-                Console.WriteLine("_____________________________");
+                Console.WriteLine("═════════════════════════════");
                 Console.WriteLine("Vols sortir de la botiga? y/n");
                 exit = Console.ReadLine();
 
@@ -46,11 +46,11 @@
         static void Benvingut()
         {
             Console.Clear();
-            Console.WriteLine("______________________________________________");
             Console.WriteLine("Benvingut a la nostre botiga, que desitja fer?");
+            Console.WriteLine("══════════════════════════════════════════════");
             Console.WriteLine("1 - Botiga ");
             Console.WriteLine("2 - Cistella");
-            Console.WriteLine("3 - Sortir");
+            Console.WriteLine("3 - Sortir\n");
         }
 
         public static void Botiga(ref string[] nomsProducte, ref double[] preusProducte, ref int contadorProductes)
@@ -58,6 +58,7 @@
 
             Console.Clear();
             Console.WriteLine("Ha entrat en la nostre botiga, escolleix l'opció que vulguis:");
+            Console.WriteLine("═════════════════════════════════════════════════════════════");
             Console.WriteLine("1 - Afegir un nou producte");
             Console.WriteLine("2 - Ampliar botiga");
             Console.WriteLine("3 - Modificar preu");
@@ -85,7 +86,7 @@
                     Console.WriteLine();
                     if (contadorProductes == nomsProducte.Length)
                     {
-                        //en teoria es porque ya esta la tienda llena
+                        //en teoria la botiga esta plena
                         Console.WriteLine("No tenim espai per més productes, vols ampliar l'espai del magatzem? y/n\n");
                         while (resposta1 != "y" && resposta1 != "n")
                         {
@@ -107,8 +108,8 @@
                         nomsProducte[contadorProductes] = nomProducte;
                         preusProducte[contadorProductes] = preuProducte;
                         contadorProductes++;
-                        Console.WriteLine("\nProducte creat, pressiona qualsevol tecla per tornar al menú");
-                        Console.ReadLine();
+                        Console.WriteLine("\nProducte creat");
+                        Thread.Sleep(1500);
                     }
 
                     break;
@@ -138,8 +139,11 @@
 
         public static void Cistella(ref string[] nomsProducte, ref double[] preusProducte, ref int contadorProductes, ref double diners)
         {
+            string[] productesCarro = new string[10];
+
             Console.Clear();
             Console.WriteLine("Ha entrat a la seva cistella, escull l'opció que vulguis:");
+            Console.WriteLine("═════════════════════════════════════════════════════════");
             Console.WriteLine("1 - Comprar producte");
             Console.WriteLine("2 - Veure cistella");
             Console.WriteLine("3 - Ordenar cistella");
@@ -162,58 +166,56 @@
                 case 2:
                     MostrarCistella(ref nomsProducte, ref preusProducte, ref contadorProductes);
                     break;
-                    //case 3:
-                    //    OrdenarCistella(ref nomsProducte, ref preusProducte, ref contadorProductes);
-                    //    break;
-                    //case 4:
-                    //    MostrarTiquet(ref nomsProducte, ref preusProducte, ref contadorProductes, ref diners);
-                    //    break;
+                case 3:
+                    OrdenarCistella(ref nomsProducte, ref preusProducte, ref contadorProductes);
+                    break;
+                case 4:
+                    MostrarTiquet(ref nomsProducte, ref preusProducte, ref contadorProductes, ref diners);
+                    break;
             }
         }
+
         public static void ComprarProducte(ref string[] nomsProducte, ref double[] preusProducte, ref int contadorProductes, ref double diners)
         {
-            Console.WriteLine("Introduce el nombre del producto que quieres comprar:");
+
+            Console.Clear();
+            MostrarBotiga(nomsProducte, preusProducte);
+            Console.WriteLine("══════════════════════════════════");
+            Console.WriteLine("Has entrat en la botiga\n");
+            Console.WriteLine($"\nA la teva caixa hi ha: {diners} euros\n");
+
+            Console.WriteLine("Introdueix el nom del producte que vols comprar:");
             string nombreProducto = Console.ReadLine();
-            Console.WriteLine("\nIntroduce la cantidad de productos que quieres comprar:");
+            Console.WriteLine("\nIntrodueix la quantitat de productes que vols comprar:");
             int cantidad = int.Parse(Console.ReadLine());
-            int indexProducto = -1;
 
             for (int i = 0; i < nomsProducte.Length; i++)
             {
                 if (nombreProducto == nomsProducte[i])
                 {
-                    indexProducto = i;
-                    break;
-                }
-            }
-
-            if (indexProducto == -1)
-            {
-                Console.WriteLine("\nEl producto no existe en la tienda");
-            }
-            else
-            {
-                if (diners >= preusProducte[indexProducto] * cantidad)
-                {
-                    diners -= preusProducte[indexProducto] * cantidad;
-                    Console.WriteLine("\nProducto añadido al carrito");
-                    contadorProductes += cantidad;
-                }
-                else
-                {
-                    Console.WriteLine("\nNo tienes suficiente dinero para comprar este producto");
-                    Console.WriteLine("\n¿Quieres añadir dinero a tu cuenta? (S/N)");
-                    string opcion = Console.ReadLine();
-                    if (opcion.ToUpper() == "S")
+                    if (diners >= preusProducte[i] * cantidad)
                     {
-                        Console.WriteLine("\nIntroduce la cantidad de dinero que quieres añadir:");
-                        double dineroAAgregar = double.Parse(Console.ReadLine());
-                        diners += dineroAAgregar;
-                        ComprarProducte(ref nomsProducte, ref preusProducte, ref contadorProductes, ref diners);
+                        diners -= preusProducte[i] * cantidad;
+                        Console.WriteLine("\nProducte possat a la caixa");
+                        Thread.Sleep(2000);
                     }
                     else
                     {
-                        Console.WriteLine("\nNo se ha añadido dinero a la cuenta");
+                        Console.WriteLine("\nNo tens suficients diners per comprar aquest producte");
+                        Console.WriteLine("\nVos afegir diners als teus estalvis? (S/N)");
+                        string opcion = Console.ReadLine();
+                        if (opcion.ToUpper() == "S")
+                        {
+                            Console.WriteLine("\nIntrodueix la quantitat de diners que vols afegi-hi:");
+                            double dineroAAgregar = double.Parse(Console.ReadLine());
+                            diners += dineroAAgregar;
+                            ComprarProducte(ref nomsProducte, ref preusProducte, ref contadorProductes, ref diners);
+                        }
+                        else
+                        {
+                            Console.WriteLine("\nNo s'ha afegit diners al teu compte i no s'ha pogut comprar el producte");
+                            Thread.Sleep(2000);
+                        }
                     }
                 }
             }
@@ -224,21 +226,58 @@
             if (contadorProductes == 0)
             {
                 Console.WriteLine("La cistella está vacía.");
+                Thread.Sleep(2000);
             }
             else
             {
-                Console.WriteLine("Productos en la cistella:");
+                Console.WriteLine("Productes en la cistella:");
                 for (int i = 0; i < contadorProductes; i++)
                 {
-                    Console.WriteLine(nomsProducte[i] + " " + preusProducte[i] + "€");
+                    Console.WriteLine(nomsProducte[i] + " " + preusProducte[i] + " euros");
+                    Thread.Sleep(100);
                 }
+                Thread.Sleep(2000);
             }
         }
 
+        public static void OrdenarCistella(ref string[] nomsProducte, ref double[] preusProducte, ref int contadorProductes)
+        {
+            Console.Clear();
+            for (int i = 0; i < contadorProductes; i++)
+            {
+                for (int j = i + 1; j < contadorProductes; j++)
+                {
+                    if (preusProducte[i] > preusProducte[j])
+                    {
+                        double temp = preusProducte[i];
+                        preusProducte[i] = preusProducte[j];
+                        preusProducte[j] = temp;
+
+                        string tempNom = nomsProducte[i];
+                        nomsProducte[i] = nomsProducte[j];
+                        nomsProducte[j] = tempNom;
+                    }
+                }
+            }
+            Console.WriteLine("\nCistella ordenada!");
+            Thread.Sleep(2000);
+        }
+
+        public static void MostrarTiquet(ref string[] nomsProducte, ref double[] preusProducte, ref int contadorProductes, ref double diners)
+        {
+            double preuTotal = 0;
+            Console.WriteLine("Nom\t\tPreu");
+            for (int i = 0; i < contadorProductes; i++)
+            {
+                Console.WriteLine(nomsProducte[i] + "\t\t" + preusProducte[i]);
+                preuTotal += preusProducte[i];
+            }
+            Console.WriteLine("Preu total: " + preuTotal);
+        }
 
         static void AmpliarBotiga(ref string[] nomsProducte, ref double[] preusProducte, ref int contadorProductes)
         {
-            Console.WriteLine("\nIntroduce el espacio total de productos que deseas: ");
+            Console.WriteLine("\nIntrodueix la quantitat d'espais que vols afegir: ");
             int cantidad = int.Parse(Console.ReadLine());
             if (cantidad > contadorProductes)
             {
@@ -259,14 +298,14 @@
 
             else
             {
-                Console.WriteLine("No se puede hacer la tienda mas pequeña o igual");
+                Console.WriteLine("No es pot fer la botiga mes petita o igual");
                 Console.ReadLine();
             }
         }
 
         static void ModificarPreu(string[] nomsProducte, ref double[] preusProducte, int contadorProductes)
         {
-            Console.WriteLine("Introduce el nombre del producto que deseas modificar el precio: ");
+            Console.WriteLine("Introdueix el nom que desitges modificar: ");
             string nomProducte = Console.ReadLine();
             int posicionPrecio = -1;
 
@@ -280,25 +319,25 @@
 
             if (posicionPrecio != -1)
             {
-                Console.WriteLine("Introduce el nuevo precio: ");
+                Console.WriteLine("Introdueix el nou preu: ");
                 double nouPreu = double.Parse(Console.ReadLine());
 
                 preusProducte[posicionPrecio] = nouPreu;
-                //he encontrado el producto
+                //he trobat el producte
                 Console.WriteLine(nouPreu);
                 Console.ReadLine();
 
             }
             else
             {
-                Console.WriteLine("No existe un producto con ese nombre");
+                Console.WriteLine("No existeix el producte");
                 Console.ReadLine();
             }
         }
 
         public static void ModificarNomDeProducte(ref string[] nomsProducte, double[] preusProducte, int contadorProductes)
         {
-            Console.WriteLine("Introduce el nombre del producto que deseas modificar su nombre: ");
+            Console.WriteLine("Introdueix el nom del producte que desitges modificar: ");
             string nomProducte = Console.ReadLine();
             int posicionNom = -1;
 
@@ -316,20 +355,21 @@
                 string nouNom = Console.ReadLine();
 
                 nomsProducte[posicionNom] = nouNom;
-                //he encontrado el producto
+                //hem trobat el producte
                 Console.WriteLine(nouNom);
                 Console.ReadLine();
 
             }
             else
             {
-                Console.WriteLine("No existe un producto con ese nombre");
+                Console.WriteLine("No existeix el producte");
                 Console.ReadLine();
             }
         }
 
         public static void OrdenarPerNom(ref string[] nomsProducte, ref double[] preusProducte, ref int contadorProductes)
         {
+            
             string aux;
             double aux2;
             for (int i = 1; i <= contadorProductes; i++)
@@ -349,7 +389,7 @@
             }
 
             Console.Clear();
-            Console.WriteLine("Nombre del producto\tPrecio");
+            Console.WriteLine("Nom del producte \tPreu");
             Console.WriteLine("--------------------------------------");
 
 
@@ -360,9 +400,9 @@
             Thread.Sleep(10000);
 
         }
-
         public static void OrdenarPerPreu(ref string[] nomsProducte, ref double[] preusProducte, ref int contadorProductes)
         {
+
             int pmenor;
             for (int volta = 0; volta < contadorProductes - 1; volta++)
             {
@@ -386,7 +426,7 @@
 
 
             Console.Clear();
-            Console.WriteLine("Nombre del producto\tPrecio");
+            Console.WriteLine("Nom del producte\tPreu");
             Console.WriteLine("--------------------------------------");
 
 
@@ -399,12 +439,11 @@
         }
 
 
-
         public static void MostrarBotiga(string[] nomsProducte, double[] preusProducte)
         {
             Console.Clear();
-            Console.WriteLine("Nombre del producto\tPrecio");
-            Console.WriteLine("--------------------------------------");
+            Console.WriteLine("Nom del producte\tPreu");
+            Console.WriteLine("═════════════════════════════════════");
 
 
             for (int i = 0; i < nomsProducte.Length; i++)
@@ -415,5 +454,4 @@
         }
 
     }
-
 }
