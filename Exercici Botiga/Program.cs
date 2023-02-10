@@ -376,5 +376,39 @@
             Thread.Sleep(4000);
         }
 
+        public static void Cistella(ref string[] nomsProducte, ref double[] preusProducte, ref int contadorProductes, ref double diners)
+        {
+            Console.Clear();
+            Console.WriteLine("Ha entrat a la seva cistella, escull l'opció que vulguis:");
+            Console.WriteLine("1 - Comprar producte");
+            Console.WriteLine("2 - Veure cistella");
+            Console.WriteLine("3 - Ordenar cistella");
+            Console.WriteLine("4 - Mostrar tiquet");
+            Console.WriteLine("5 - Tornar enrere\n");
+
+            int resposta = int.Parse(Console.ReadLine());
+            Console.WriteLine();
+
+            while (resposta < 1 || resposta > 5)
+            {
+                resposta = int.Parse(Console.ReadLine());
+            }
+
+            switch (resposta)
+            {
+                case 1:
+                    ComprarProducte(nomsProducte,  preusProducte, ref contadorProductes, ref diners);
+                    break;
+                case 2:
+                    MostrarCistella( nomsProducte,  preusProducte, ref contadorProductes);
+                    break;
+                case 3:
+                    OrdenarCistella( nomsProducte, preusProducte, ref contadorProductes);
+                    break;
+                case 4:
+                    MostrarTiquet( nomsProducte, preusProducte, ref contadorProductes, ref diners);
+                    break;
+            }
+        }
     }
 }
