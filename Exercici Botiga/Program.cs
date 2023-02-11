@@ -172,9 +172,9 @@
                 case 3:
                     OrdenarCistella(ref nomsProducte, ref preusProducte, ref contadorProductes);
                     break;
-                    //case 4:
-                    //    MostrarTiquet(nomsProducte, preusProducte, contadorProductes, cantidadesCarro);
-                    //    break;
+                case 4:
+                    MostrarTiquet(nomsProducte, preusProducte, contadorProductes, cantidadesCarro);
+                    break;
             }
         }
 
@@ -302,47 +302,47 @@
             Thread.Sleep(2000);
         }
 
-        //public static void MostrarTiquet(string[] nomsProducte, double[] preusProducte, int contadorProductes, int[] cantidadesCarro)
-        //{
+        public static void MostrarTiquet(string[] nomsProducte, double[] preusProducte, int contadorProductes, int[] cantidadesCarro)
+        {
 
-        //    if (contadorProductes == 0)
-        //    {
-        //        for (int i = 0; i < cantidadesCarro.Length; i++)
-        //        {
-        //            if (cantidadesCarro[0] == 0)
-        //            {
-        //                Console.WriteLine("La cistella està vuída.");
-        //                Thread.Sleep(3000);
-        //                return;
-        //            }
-        //        }
-        //    }
-        //    else
-        //    {
-        //        Console.WriteLine("Productes en la cistella:");
-        //        for (int i = 0; i < cantidadesCarro.Length; i++)
-        //        {
-        //            if (cantidadesCarro[i] != 0)
-        //            {
-        //                Console.WriteLine(nomsProducte[i] + " - Preu: " + preusProducte[i] + " euros\t\t-->\t ║ Quantitat al carro: " + cantidadesCarro[i]);
-        //                Thread.Sleep(300);
-        //            }
-        //        }
-        //        Console.WriteLine("                                         ║\t\tTOTAL: " + CalcularPrecioTotal(ref cantidadesCarro, ref preusProducte));
-        //        Thread.Sleep(4000);
-        //    }
+            if (contadorProductes == 0)
+            {
+                for (int i = 0; i < cantidadesCarro.Length; i++)
+                {
+                    if (cantidadesCarro[0] == 0)
+                    {
+                        Console.WriteLine("La cistella està vuída.");
+                        Thread.Sleep(3000);
+                        return;
+                    }
+                }
+            }
+            else
+            {
+                Console.WriteLine("Productes en la cistella:");
+                for (int i = 0; i < cantidadesCarro.Length; i++)
+                {
+                    if (cantidadesCarro[i] != 0)
+                    {
+                        Console.WriteLine(nomsProducte[i] + " - Preu: " + preusProducte[i] + " euros\t\t-->\t ║ Quantitat al carro: " + cantidadesCarro[i]);
+                        Thread.Sleep(300);
+                    }
+                }
+                Console.WriteLine("                                         ║\t\tTOTAL: " + CalcularPrecioTotal(ref cantidadesCarro, ref preusProducte));
+                Thread.Sleep(4000);
+            }
 
-        //}
+        }
 
-        //public static double CalcularPrecioTotal(ref int[] cantidadesCarro, ref double[] preusProducte)
-        //{
-        //    double precioTotal = 0;
-        //    for (int i = 0; i < cantidadesCarro.Length; i++)
-        //    {
-        //        precioTotal += cantidadesCarro[i] * preusProducte[i];
-        //    }
-        //    return precioTotal;
-        //}
+        public static double CalcularPrecioTotal(ref int[] cantidadesCarro, ref double[] preusProducte)
+        {
+            double precioTotal = 0;
+            for (int i = 0; i < cantidadesCarro.Length; i++)
+            {
+                precioTotal += cantidadesCarro[i] * preusProducte[i];
+            }
+            return precioTotal;
+        }
 
         static void AmpliarBotiga(ref string[] nomsProducte, ref double[] preusProducte, ref int contadorProductes)
         {
